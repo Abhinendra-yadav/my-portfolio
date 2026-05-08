@@ -106,7 +106,13 @@ export default function App() {
                 <span className="relative z-10">View Projects</span>
                 <div className="absolute inset-0 bg-cyan-400 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
               </a>
-              <a href="#" className="px-10 py-5 bg-transparent text-white border border-white/10 rounded-2xl font-black text-[11px] tracking-[0.3em] uppercase transition-all hover:bg-white/5 hover:border-white/30">Download Resume</a>
+              <a 
+  href="Abhinendra Resume.pdf" 
+  download="Abhinendra Resume.pdf"
+  className="px-10 py-5 bg-transparent text-white border border-white/10 rounded-2xl font-black text-[11px] tracking-[0.3em] uppercase transition-all hover:bg-white/5 hover:border-white/30"
+>
+  Download Resume
+</a>
             </div>
           </div>
           <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-20 animate-pulse">
