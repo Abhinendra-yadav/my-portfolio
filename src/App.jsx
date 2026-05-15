@@ -72,19 +72,59 @@ export default function App() {
       </nav>
 
       {/* 1. HOME SECTION */}
-      <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 pb-12 px-6 overflow-hidden">
+   {/* 1. HOME SECTION */}
+      <section 
+        id="home" 
+        className="relative min-h-screen flex items-center justify-center pt-20 pb-12 px-6 overflow-hidden"
+        onMouseMove={(e) => {
+          const card = document.getElementById('profile-card');
+          const box = card.getBoundingClientRect();
+          const x = e.clientX - box.left - box.width / 2;
+          const y = e.clientY - box.top - box.height / 2;
+          card.style.transform = `perspective(1000px) rotateX(${-y / 10}deg) rotateY(${x / 10}deg)`;
+        }}
+        onMouseLeave={() => {
+          document.getElementById('profile-card').style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+        }}
+      >
+        {/* Subtle 3D Grid Overlay */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] -z-10"></div>
+        
         <div className="absolute top-1/4 -left-20 w-[500px] h-[500px] bg-cyan-500/10 blur-[120px] rounded-full -z-10 animate-pulse"></div>
         <div className="absolute bottom-1/4 -right-20 w-[500px] h-[500px] bg-indigo-500/10 blur-[120px] rounded-full -z-10 animate-pulse" style={{ animationDelay: '2s' }}></div>
 
         <div className="max-w-7xl w-full mx-auto flex flex-col items-center relative z-10">
-          <div className="relative mb-14 group">
-            <div className="absolute -inset-1.5 bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-500 rounded-full blur opacity-30 group-hover:opacity-60 transition-all duration-1000 group-hover:rotate-180"></div>
-            <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-full p-2 backdrop-blur-3xl bg-white/[0.03] border border-white/10 shadow-2xl overflow-hidden flex items-center justify-center transition-transform duration-700 group-hover:scale-[1.02]">
-              <img src="my-photo.png" alt="Abhinendra Yadav" className="w-full h-full object-cover rounded-full grayscale-[20%] group-hover:grayscale-0 transition-all duration-700" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
+          
+          {/* ENHANCED 3D PROFILE CARD */}
+          <div 
+            id="profile-card"
+            className="relative mb-14 group transition-transform duration-200 ease-out preserve-3d"
+            style={{ transformStyle: 'preserve-3d' }}
+          >
+            {/* 3D Glow Layer */}
+            <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-500" style={{ transform: 'translateZ(-20px)' }}></div>
+            
+            {/* Main Image Container */}
+            <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-full p-1.5 backdrop-blur-3xl bg-white/[0.03] border border-white/20 shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden flex items-center justify-center transition-all duration-700">
+              <img 
+                src="my-photo.png" 
+                alt="Abhinendra Yadav" 
+                className="w-full h-full object-cover rounded-full group-hover:scale-110 transition-transform duration-700" 
+                style={{ transform: 'translateZ(30px)' }}
+                onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} 
+              />
               <div className="hidden w-full h-full rounded-full bg-slate-900 items-center justify-center font-black text-7xl text-cyan-500 tracking-tighter uppercase">AY</div>
             </div>
-            <div className="absolute -bottom-4 -right-4 bg-white/5 backdrop-blur-2xl border border-white/10 px-5 py-2 rounded-2xl shadow-xl animate-bounce">
-              <span className="text-[10px] font-black text-cyan-400 tracking-[0.2em] uppercase">Ready to Build 🚀</span>
+
+            {/* Floating Badge (3D Offset) */}
+            <div 
+              className="absolute -bottom-2 -right-6 bg-white/10 backdrop-blur-3xl border border-white/20 px-6 py-2.5 rounded-2xl shadow-2xl transition-all duration-500 group-hover:translate-z-50"
+              style={{ transform: 'translateZ(50px)' }}
+            >
+              <span className="text-[10px] font-black text-cyan-400 tracking-[0.2em] uppercase flex items-center gap-2">
+                <span className="w-2 h-2 bg-cyan-400 rounded-full animate-ping"></span>
+                Ready to Build
+              </span>
             </div>
           </div>
 
@@ -96,28 +136,27 @@ export default function App() {
               </span>
               <span className="text-white/40 font-black text-[10px] tracking-[0.4em] uppercase">Full Stack Developer | AI Enthusiast</span>
             </div>
+
             <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.85] uppercase">
               <span className="inline-block text-white">HI, I'M</span><br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-br from-white via-cyan-400 to-blue-600 drop-shadow-[0_15px_15px_rgba(0,0,0,0.3)]">ABHINENDRA.</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-br from-white via-cyan-400 to-blue-600 drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)]">ABHINENDRA.</span>
             </h1>
+            
             <p className="text-lg md:text-xl opacity-40 max-w-2xl mx-auto font-medium leading-relaxed tracking-tight">Engineering intelligent solutions with a focus on modern web ecosystems and high-performance AI integration.</p>
+            
             <div className="flex flex-wrap justify-center gap-6 pt-10">
-              <a href="#projects" className="group relative px-10 py-5 bg-white text-black rounded-2xl font-black text-[11px] tracking-[0.3em] uppercase transition-all hover:bg-cyan-500 hover:text-white overflow-hidden shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+              <a href="#projects" className="group relative px-10 py-5 bg-white text-black rounded-2xl font-black text-[11px] tracking-[0.3em] uppercase transition-all hover:shadow-[0_0_40px_rgba(6,182,212,0.4)] overflow-hidden">
                 <span className="relative z-10">View Projects</span>
                 <div className="absolute inset-0 bg-cyan-400 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
               </a>
               <a 
-  href="Abhinendra Resume.pdf" 
-  download="Abhinendra Resume.pdf"
-  className="px-10 py-5 bg-transparent text-white border border-white/10 rounded-2xl font-black text-[11px] tracking-[0.3em] uppercase transition-all hover:bg-white/5 hover:border-white/30"
->
-  Download Resume
-</a>
+                href="Abhinendra_Resume.pdf" 
+                download="Abhinendra_Resume.pdf"
+                className="px-10 py-5 bg-transparent text-white border border-white/10 rounded-2xl font-black text-[11px] tracking-[0.3em] uppercase transition-all hover:bg-white/5 hover:border-white/40 hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]"
+              >
+                Download Resume
+              </a>
             </div>
-          </div>
-          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-20 animate-pulse">
-            <span className="text-[9px] font-black tracking-[0.5em] uppercase vertical-text">Scroll</span>
-            <div className="w-[1px] h-12 bg-gradient-to-b from-white to-transparent"></div>
           </div>
         </div>
       </section>
